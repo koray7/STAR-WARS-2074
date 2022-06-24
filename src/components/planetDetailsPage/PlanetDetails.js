@@ -15,7 +15,7 @@ function PlanetDetails() {
                 console.log(data)
                 setPlanets(data.results)
             }).catch(err => console.error(err))
-    }, [])
+    },[])
 
     return (
         <div className="planets-list">
@@ -23,9 +23,12 @@ function PlanetDetails() {
                 {planets.map((planet, idx) => {
                     return (
                         
-                        <Link to={`planets/${planet.orbital_period}`} key={planet.orbital_period}>
+                        <Link to={`planets/${planet.orbital_period}`} 
+                            key={planet.orbital_period}>
                             <div key={idx}>
-                                <span className="planets-detail">{planet.name}
+                                
+                                <span className="planets-detail">
+                                    {planet.name}
                                 </span>
 
                             </div>

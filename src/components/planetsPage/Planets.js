@@ -10,7 +10,7 @@ function Planets() {
                 </a>
             </h1>
             <h2>
-                <Link to="/planets" className="planets-link">Click to see ~~PLANETS~~</Link>
+                <Link to="/planets" className="planets-link">Click to see PLANETS !!</Link>
             </h2>
         </div>
     )
