@@ -19,7 +19,7 @@ function ResidentsName() {
 
     return(
         <div>
-           {/* {resName.map((res, idx) => {
+           {resName.map((res, idx) => {
                     return (
                         
                         <Link to={`planets/${res.orbital_period}`} 
@@ -34,7 +34,7 @@ function ResidentsName() {
 
                         </Link>
                     )
-                })} */}
+                })}
             
         </div>
     )
