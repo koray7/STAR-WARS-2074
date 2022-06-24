@@ -22,13 +22,15 @@ function PlanetDetails() {
             <section>
                 {planets.map((planet, idx) => {
                     return (
-
+                        
+                        <Link to={`planets/${planet.idx}`} key={planet.idx}>
                             <div key={idx}>
                                 <span className="planets-detail">{planet.name}
                                 </span>
 
                             </div>
 
+                        </Link>
                     )
                 })}
             </section>
