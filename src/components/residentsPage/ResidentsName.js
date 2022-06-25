@@ -1,43 +1,32 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Link } from "react-router-dom";
+// import { useEffect, useState } from 'react'
+// import { useParams } from 'react-router-dom'
+// import { Link } from "react-router-dom";
+import Axios from "axios";
 
 
-function ResidentsName() {
+function App() {
+const ResidentsName = () => {
 
-    const [resName, setResName] = useState({})
-    const { planet_number } = useParams()
-
-    useEffect(() => {
-        fetch(`http://swap.dev/api/planets/${planet_number}`)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-            setResName(data.result.residents)
-            }).catch(console.error)
-    }, [])
+    Axios.get("https://swapi.dev/api/planets")
+    .then((res) => {
+        console.log(res);
+    }
+    );
+};
 
     return(
         <div>
-           {resName.map((res, idx) => {
-                    return (
-                        
-                        <Link to={`planets/${res.orbital_period}`} 
-                            key={res.orbital_period}>
-                            <div key={idx}>
-                                
-                                <span className="planets-detail">
-                                    {res.name}
-                                </span>
-
-                            </div>
-
-                        </Link>
-                    )
-                })}
-            
+            <h1>People</h1>
+            <button onClick={ResidentsName}>Get Joke Right Now!</button>
         </div>
     )
 }
 
-export default ResidentsName;
+
+
+
+
+
+
+
+export default App;

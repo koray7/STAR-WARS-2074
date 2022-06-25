@@ -23,7 +23,7 @@ function PlanetDetails() {
                 {planets.map((planet, idx) => {
                     return (
                         
-                        <Link to={`planets/${planet.orbital_period}`} 
+                        <Link to={`residents/${planet.orbital_period}`} 
                             key={planet.orbital_period}>
                             <div key={idx}>
                                 
