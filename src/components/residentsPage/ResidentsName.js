@@ -10,10 +10,10 @@ const [resName, getResName] = useState("")
 
 const ResidentsName = () => {
 
-    Axios.get(`https://swapi.dev/api/planets/`)
+    Axios.get(`https://swapi.dev/api/planets`)
     .then((res) => {
         console.log(res.data)
-        getResName(res.climate)
+        getResName(res.results)
     }).catch(err => {
         console.log(err)
     })
@@ -28,6 +28,7 @@ const ResidentsName = () => {
             
             { resName ? <h1>{resName}</h1> : null}
 
+            <p>{}</p>
 
             {/* <Link to={`/planets/${planet.id}`}>{planet.name}</> */}
         </div>
