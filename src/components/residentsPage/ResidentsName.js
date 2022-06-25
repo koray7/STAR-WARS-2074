@@ -24,7 +24,7 @@ const ResidentsName = () => {
     return(
         <div>
             <h1>People</h1>
-            <button onClick={ResidentsName}>Get the residents now!</button>
+            <button onClick={ResidentsName}>Get the residents now</button>
             
             { resName ? <h1>{resName}</h1> : null}
 
