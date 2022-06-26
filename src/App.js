@@ -2,7 +2,7 @@ import Planets from "./components/planetsPage/Planets.js";
 import { Routes, Route } from "react-router-dom";
 import PlanetDetails from "./components/planetDetailsPage/PlanetDetails"
 import ResidentsName from "./components/residentsPage/ResidentsName.js";
-
+import React, { useState, useEffect } from "react"
 
 
 function App() {

@@ -1,57 +1,80 @@
-import { Link } from 'react-router-dom';
-import { useState } from "react";
-import { useCallback } from 'react'
+// import { Link } from 'react-router-dom';
+// import { useState } from "react";
+// import { useCallback } from 'react'
+// import React, { useEffect } from 'react'
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer} from "mdb-react-ui-kit"
+import "../planetsPage/Planets.css"
 
 function Planets() {
 
-    const [search, setSearch] = useState([]);
+    const [ data, setData ] = useState([]);
 
-    const oneTimeCall = (func) => {
-        let timer;
-        return function (...args) {
-            const context = this;
-            if(timer) clearTimeout(timer);
-            timer = setTimeout( () => {
-                timer = null
-                func.apply(context, args);
-            }, 500);
-        }
-    }
+    useEffect(() =>{
+        loadUsersData();
+    }, []);
 
-    const handleChange = (event) => {
-        const {value} = event.target;
-        fetch(`https://swapi.dev/api/planets/${value}`)
-        .then(res => res.json())
-        .then(json => setSearch(json.data));
-    }
+    const loadUsersData = async () => {
+        return await axios
+        .get("https://swapi.dev/api/planets/")
+        .then((res) => setData(res.data))
+        .catch((err) => console.log(err));
 
-    const optimizeVersion = useCallback(oneTimeCall(handleChange), [])
+    };
 
+    console.log("data", data);
     return (
-        <div>
-            <h1>
-                <a className="planets-page" href="/">All the planets are here!!
-                </a>
-            </h1>
-            <h2>
-                <Link to="/planets" className="planets-link">Click to see PLANETS !!</Link>
-            </h2>
-            <br />
-            <h1>Look For a Planet</h1>
-
-            <input type="text" name={"search"} placeholder="Search for planet" className="search" onChange={optimizeVersion} />
-            {search?.map((el, i) => 
-
-                <div key={i} className={'autocomplete'}>
-                    <span>{el.name}</span>
-                </div>
-            )}
-
-            <button>Submit</button>
-
-        </div>
+        <MDBContainer>
+            <div style={{marginTop: "100px"}}>
+                <h2>Search Pagination using JSON API</h2>
+                <MDBRow>
+                    <MDBCol size="12">
+                        <MDBTable>
+                            <MDBTableHead dark>
+                                <tr>
+                                    <th scope="col">Name.</th>
+                                </tr>
+                            </MDBTableHead>
+                            {data.length === 0 ? (
+                                <MDBTableBody className="align-center-mb-0">
+                                    <tr>
+                                        <td colSpan={8} className="text-center mb-0">
+                                        No Data found</td>
+                                    </tr>
+                                </MDBTableBody>
+                            ): (
+                                data.results.map((item, index) => (
+                                    <MDBTableBody key={index}>
+                                        <tr>
+                                            <td>{item.name}</td>
+                                        </tr>
+                                    </MDBTableBody>
+                                ))
+                            )}
+                        </MDBTable>
+                    </MDBCol>
+                </MDBRow>
+            </div>
+        </MDBContainer>
     )
 }
 
 
 export default Planets;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
