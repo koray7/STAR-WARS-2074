@@ -4,13 +4,13 @@
 // import React, { useEffect } from 'react'
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer, MDBBtn, MDBBtnGroup} from "mdb-react-ui-kit"
+import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer, MDBBtn} from "mdb-react-ui-kit"
 import "../planetsPage/Planets.css"
 
 function Planets() {
 
     const [ data, setData ] = useState([]);
-    const [ value, setValue ] = useState([]);
+    const [ value, setValue ] = useState("");
 
     useEffect(() =>{
         loadUsersData();
@@ -26,12 +26,23 @@ function Planets() {
 
     console.log("data", data);
 
-    const handleSearch = () => {};
-    const handleReset = () => {};
+    const handleSearch = async (e) => {
+    e.preventDefault();
+    return await axios.get(`https://swapi.dev/api/planets/?search=${value}`)
+    .then((res) => {
+    setData(res.data);
+    setValue("");
+    })
+    .catch((err) => console.log(err))
+};
+    const handleReset =  () => {
+        loadUsersData();
+    };
 
 
     return (
         <MDBContainer>
+                    <h2 className="text-center">Search for the Planets</h2>
         <form style={{
             margin: "auto",
             padding: "15px",
@@ -49,20 +60,19 @@ function Planets() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
         />
-        {/* <MDBBtnGroup> */}
+
             <MDBBtn type="submit" color="dark">Search</MDBBtn>
             <MDBBtn className="mx-2" color="info" onClick={() => handleReset()}>Reset</MDBBtn>
-        {/* </MDBBtnGroup> */}
+
 
         </form>
             <div style={{marginTop: "100px"}}>
-                <h2 className="text-center">Search Pagination using JSON API</h2>
                 <MDBRow>
                     <MDBCol size="12">
                         <MDBTable>
                             <MDBTableHead dark>
                                 <tr>
-                                    <th scope="col">Name.</th>
+                                    <th className="text-center" scope="col">NAME OF THE PLANETS</th>
                                 </tr>
                             </MDBTableHead>
                             {data.length === 0 ? (
@@ -76,7 +86,7 @@ function Planets() {
                                 data.results.map((item, index) => (
                                     <MDBTableBody key={index}>
                                         <tr>
-                                            <td>{item.name}</td>
+                                            <td><h1>{item.name}</h1> Click to see the residents of the planets</td>
                                         </tr>
                                     </MDBTableBody>
                                 ))
