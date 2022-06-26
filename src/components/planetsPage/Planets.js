@@ -4,12 +4,13 @@
 // import React, { useEffect } from 'react'
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer} from "mdb-react-ui-kit"
+import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer, MDBBtn, MDBBtnGroup} from "mdb-react-ui-kit"
 import "../planetsPage/Planets.css"
 
 function Planets() {
 
     const [ data, setData ] = useState([]);
+    const [ value, setValue ] = useState([]);
 
     useEffect(() =>{
         loadUsersData();
@@ -24,10 +25,38 @@ function Planets() {
     };
 
     console.log("data", data);
+
+    const handleSearch = () => {};
+    const handleReset = () => {};
+
+
     return (
         <MDBContainer>
+        <form style={{
+            margin: "auto",
+            padding: "15px",
+            maxWidth: "400px",
+            alignContent: "center",
+        }}
+        className="d-flex input-group w-auto"
+        onSubmit={handleSearch}
+        >
+
+        <input 
+            type="text"
+            className="form-control"
+            placeholder="Search Name of the planet..."
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+        />
+        <MDBBtnGroup>
+            <MDBBtn type="submit" color="dark">Search</MDBBtn>
+            <MDBBtn className="mx-2" color="info" onClick={() => handleReset()}>Reset</MDBBtn>
+        </MDBBtnGroup>
+
+        </form>
             <div style={{marginTop: "100px"}}>
-                <h2>Search Pagination using JSON API</h2>
+                <h2 className="text-center">Search Pagination using JSON API</h2>
                 <MDBRow>
                     <MDBCol size="12">
                         <MDBTable>
