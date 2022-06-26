@@ -49,10 +49,10 @@ function Planets() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
         />
-        <MDBBtnGroup>
+        {/* <MDBBtnGroup> */}
             <MDBBtn type="submit" color="dark">Search</MDBBtn>
             <MDBBtn className="mx-2" color="info" onClick={() => handleReset()}>Reset</MDBBtn>
-        </MDBBtnGroup>
+        {/* </MDBBtnGroup> */}
 
         </form>
             <div style={{marginTop: "100px"}}>
