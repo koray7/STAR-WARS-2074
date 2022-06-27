@@ -1,17 +1,16 @@
-// import { Link } from 'react-router-dom';
-// import { useState } from "react";
-// import { useCallback } from 'react'
-// import React, { useEffect } from 'react'
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer, MDBBtn} from "mdb-react-ui-kit"
 import "../planetsPage/Planets.css"
+import { Link } from "react-router-dom";
+
 
 function Planets() {
 
     const [ data, setData ] = useState([]);
     const [ value, setValue ] = useState("");
-
+    
+    
     useEffect(() =>{
         loadUsersData();
     }, []);
@@ -56,14 +55,15 @@ function Planets() {
         <input 
             type="text"
             className="form-control"
-            placeholder="Search Name of the planet..."
+            placeholder="Name of the planet..."
             value={value}
             onChange={(e) => setValue(e.target.value)}
         />
 
             <MDBBtn type="submit" color="dark">Search</MDBBtn>
-            <MDBBtn className="mx-2" color="info" onClick={() => handleReset()}>Reset</MDBBtn>
-
+            <MDBBtn className="mx-2" color="info" 
+            onClick={() => handleReset()}>Reset
+            </MDBBtn>
 
         </form>
             <div style={{marginTop: "100px"}}>
@@ -79,16 +79,27 @@ function Planets() {
                                 <MDBTableBody className="align-center-mb-0">
                                     <tr>
                                         <td colSpan={8} className="text-center mb-0">
+                                        
                                         No Data found</td>
                                     </tr>
                                 </MDBTableBody>
-                            ): (
+                            ) : (
+                                
                                 data.results.map((item, index) => (
+
                                     <MDBTableBody key={index}>
                                         <tr>
-                                            <td><h1>{item.name}</h1> Click to see the residents of the planets</td>
+
+                                            <td>
+                                                <Link to={`residents/${item.orbital_period}`} 
+                                                    key={item.orbital_period}>
+                                                    <h1>{item.name}</h1> Click to see the residents of the planets
+                                                </Link>
+                                            </td>
+                        
                                         </tr>
                                     </MDBTableBody>
+                                
                                 ))
                             )}
                         </MDBTable>
