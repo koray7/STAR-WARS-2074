@@ -91,8 +91,8 @@ function Planets() {
                                         <tr>
 
                                             <td>
-                                                <Link to={`residents/${item.orbital_period}`} 
-                                                    key={item.orbital_period}>
+                                                <Link to={`/planetName/${index+1}`} 
+                                                    key={index}>
                                                     <h1>{item.name}</h1> Click to see the residents of the planets
                                                 </Link>
                                             </td>

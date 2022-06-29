@@ -1,6 +1,6 @@
 import Planets from "./components/planetsPage/Planets.js";
 import { Routes, Route } from "react-router-dom";
-import PlanetDetails from "./components/planetDetailsPage/PlanetDetails"
+import PlanetName from "./components/planetDetailsPage/PlanetName"
 import ResidentsName from "./components/residentsPage/ResidentsName.js";
 
 
@@ -11,9 +11,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Planets />} />
-        <Route path="/planets" element={<PlanetDetails />} />
-        <Route path="/planets/item.orbital_period" element={<ResidentsName />} />
+        <Route path="/" exact element={<Planets />} />
+        <Route path="/planetName/:index" element={<PlanetName />} />
+        <Route path="/residents" element={<ResidentsName />} />
       </Routes>
     </div>
   );
