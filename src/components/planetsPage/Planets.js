@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import {MDBTable, MDBTableHead, MDBTableBody, MDBRow, MDBCol, MDBContainer, MDBBtn} from "mdb-react-ui-kit"
-import "../planetsPage/Planets.css"
 import { Link } from "react-router-dom";
 
 
@@ -23,7 +22,7 @@ function Planets() {
 
     };
 
-    console.log("data", data);
+    // console.log("data", data);
 
     const handleSearch = async (e) => {
     e.preventDefault();
@@ -41,7 +40,8 @@ function Planets() {
 
     return (
         <MDBContainer>
-                    <h2 className="text-center">Search for the Planets</h2>
+        <br />
+                    <h2 className="text-center">Search for the Planet</h2>
         <form style={{
             margin: "auto",
             padding: "15px",
@@ -93,7 +93,7 @@ function Planets() {
                                             <td>
                                                 <Link to={`/planetName/${index+1}`} 
                                                     key={index}>
-                                                    <h1>{item.name}</h1> Click to see the residents of the planets
+                                                    <h1>{item.name}</h1> Click to see the planet
                                                 </Link>
                                             </td>
                         
