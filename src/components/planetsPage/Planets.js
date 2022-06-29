@@ -41,7 +41,7 @@ function Planets() {
     return (
         <MDBContainer>
         <br />
-                    <h2 className="text-center">Planet Search</h2>
+                    <h2 className="text-center">Search for a planet</h2>
         <form style={{
             margin: "auto",
             padding: "15px",

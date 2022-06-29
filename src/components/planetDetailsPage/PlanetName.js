@@ -8,14 +8,16 @@ function PlanetName() {
     const [planet, setPlanet] = useState([]);
     const { index } = useParams()
 
-    useEffect(() => {
-        fetch(`https://swapi.dev/api/planets/${index}`)
+
+    useEffect( () => {
+        (fetch(`https://swapi.dev/api/planets/${index}`)
         .then((res) => res.json())
         .then((data) => {
+            
             console.log(data)
             setPlanet(data.name)
         }).catch(console.error)
-    }, []);
+    )}, []);
     
 
     return (
