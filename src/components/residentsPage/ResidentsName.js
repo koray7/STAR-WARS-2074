@@ -1,36 +1,53 @@
-import { useState } from 'react'
-// import { useParams } from 'react-router-dom'
-// import { Link } from "react-router-dom";
-import Axios from "axios";
+
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { MDBTableBody } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 
-function App() {
-
-const [resName, getResName] = useState("")
 
 const ResidentsName = () => {
 
-    Axios.get(`https://swapi.dev/api/planets`)
-    .then((res) => {
-        console.log(res.data)
-        getResName(res.results)
-    }).catch(err => {
-        console.log(err)
-    })
-        
-    
-};
+    const [ resident, setResident ] = useState([])
+    const { index } = useParams()
+    useEffect(() => {
 
+        fetch(`https://swapi.dev/api/planets/${index}`)
+        .then((res) => res.json())
+        .then((data) => {
+
+
+            data.residents.map((item, index) =>(
+                fetch(item)
+                .then((x) => x.json())
+                .then((y) => {
+                    console.log(y)
+                    setResident(y.name)
+                })
+                
+            ))
+        })
+    }, []);
+        
+console.log(resident);
     return(
         <div>
-            <h1>People</h1>
-            <button onClick={ResidentsName}>Get the residents now</button>
+            {resident.map((item, index) => (
+                <MDBTableBody key={index}>
+                    <tr>
+                        <td>
+                            <Link to={''} 
+                            key={index}>
+                                <h1>{item}</h1> Click to see the planet
+                            </Link>
+                        </td>
+                    </tr>
+                </MDBTableBody>
+
+        ))}
             
-            { resName ? <h1>{resName}</h1> : null}
-
-            <p>{}</p>
-
-            {/* <Link to={`/planets/${planet.id}`}>{planet.name}</> */}
+            <h1>{resident}</h1>
         </div>
     )
 }
@@ -42,4 +59,4 @@ const ResidentsName = () => {
 
 
 
-export default App;
+export default ResidentsName;

@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Planets />} />
         <Route path="/planetName/:index" element={<PlanetName />} />
-        <Route path="/residents" element={<ResidentsName />} />
+        <Route path="/planetName/residentsName/:index" element={<ResidentsName />} />
       </Routes>
     </div>
   );

@@ -5,7 +5,7 @@ import {MDBTable, MDBTableBody, MDBRow, MDBCol, MDBContainer} from "mdb-react-ui
 
 function PlanetName() {
 
-    const [item, setItem] = useState([]);
+    const [planet, setPlanet] = useState([]);
     const { index } = useParams()
 
     useEffect(() => {
@@ -13,7 +13,7 @@ function PlanetName() {
         .then((res) => res.json())
         .then((data) => {
             console.log(data)
-            setItem(data.name)
+            setPlanet(data.name)
         }).catch(console.error)
     }, []);
     
@@ -28,9 +28,9 @@ function PlanetName() {
         
                                 <tr>
                                     <td>
-                                        <Link to={`/planetName/${index+1}`} 
+                                        <Link to={`/planetName/residentsName/${index+1}`} 
                                                     key={index}>
-                                                    <h1>{item}</h1> Click to see the residents of the planets
+                                                    <h1>{planet}</h1> Click to see the residents of the planet
                                         </Link>
                                     </td>
 
