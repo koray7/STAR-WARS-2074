@@ -13,11 +13,11 @@ const ResidentsName = () => {
     const [ resident, setResident ] = useState([])
     const { index } = useParams()
 
-    useEffect(() => {
-        loadData();
-    }, []);
+useEffect(() => {
+    loadData();
+}, []);
 
-    const loadData = async () => {
+const loadData = async () => {
 
     await fetch(`https://swapi.dev/api/planets/${index}`)
     .then((res) => res.json())
@@ -28,11 +28,12 @@ const ResidentsName = () => {
         .then((x) => x.json())
         .then((y) => {
             console.log(y)
-            setResident(y.name)
+            setResident(y)
         })
         
     ))
 })};
+
 
     // console.log(resident);
     return(
@@ -46,12 +47,15 @@ const ResidentsName = () => {
                                 <tr>
                                     <td>
                                         <Link to={""} key={""}>
-                                        <h3>Residents of the planet</h3>
-                                        {resident.map(user => (
-                                            <div key={user}>
-                                                {user.name}
+                                        <h1>Residents of the planet</h1>
+                                        <br />
+                                        <br />
+                                        {/* {resident.map(user => ( */}
+                                            <div key={""}>
+                                                <h2>Name: {resident.name}</h2>
+                                                <h3>Skin Color: {resident.skin_color}</h3>
+                                                <h3>Gender: {resident.gender}</h3>
                                             </div>
-                                        ))}
                                         </Link>
                                     </td>
 
@@ -74,3 +78,25 @@ const ResidentsName = () => {
 
 
 export default ResidentsName;
+
+
+// useEffect(() => {
+//     loadData();
+// }, []);
+
+// const loadData = async () => {
+
+//     await fetch(`https://swapi.dev/api/planets/${index}`)
+//     .then((res) => res.json())
+//     .then((data) => {
+
+//     data.residents.map((item, index) =>(
+//         fetch(item)
+//         .then((x) => x.json())
+//         .then((y) => {
+//             console.log(y)
+//             setResident(y.name)
+//         })
+        
+//     ))
+// })};
