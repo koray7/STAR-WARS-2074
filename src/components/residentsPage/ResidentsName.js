@@ -55,6 +55,7 @@ const loadData = async () => {
                                                 <h2>Name: {resident.name}</h2>
                                                 <h3>Skin Color: {resident.skin_color}</h3>
                                                 <h3>Gender: {resident.gender}</h3>
+                                                <h3>Created: {resident.created}</h3>
                                             </div>
                                         </Link>
                                     </td>
@@ -78,25 +79,3 @@ const loadData = async () => {
 
 
 export default ResidentsName;
-
-
-// useEffect(() => {
-//     loadData();
-// }, []);
-
-// const loadData = async () => {
-
-//     await fetch(`https://swapi.dev/api/planets/${index}`)
-//     .then((res) => res.json())
-//     .then((data) => {
-
-//     data.residents.map((item, index) =>(
-//         fetch(item)
-//         .then((x) => x.json())
-//         .then((y) => {
-//             console.log(y)
-//             setResident(y.name)
-//         })
-        
-//     ))
-// })};
