@@ -23,7 +23,7 @@ const loadData = async () => {
     .then((res) => res.json())
     .then((data) => {
 
-    data.residents.map((item, index) =>(
+    data.residents.map((item) =>(
         fetch(item)
         .then((x) => x.json())
         .then((y) => {
@@ -46,16 +46,15 @@ const loadData = async () => {
 
                                 <tr>
                                     <td>
-                                        <Link to={""} key={""}>
+                                        <Link to={`/planetName/residentsName/residentDetails/${index}`} key={index}>
                                         <h1>Residents of the planet</h1>
+                                        <br />
                                         <br />
                                         <br />
                                         {/* {resident.map(user => ( */}
                                             <div key={""}>
-                                                <h2>Name: {resident.name}</h2>
-                                                <h3>Skin Color: {resident.skin_color}</h3>
-                                                <h3>Gender: {resident.gender}</h3>
-                                                <h3>Created: {resident.created}</h3>
+                                                <h2>Name: {resident.name}</h2><br />
+                                                <h5>Click to see details of the resident</h5>
                                             </div>
                                         </Link>
                                     </td>

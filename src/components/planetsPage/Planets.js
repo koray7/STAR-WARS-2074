@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Planets() {
 
     const [ data, setData ] = useState([]);
-    const [ value, setValue ] = useState("");
+    const [ value, setValue ] = useState([]);
     
     
     useEffect(() =>{
