@@ -10,14 +10,18 @@ import { MDBTable, MDBTableBody, MDBRow, MDBCol, MDBContainer} from "mdb-react-u
 
 const ResidentsName = () => {
 
-    const [ resident, setResident ] = useState("")
+    const [ resident, setResident ] = useState([])
     const { index } = useParams()
 
     useEffect(() => {
-    fetch(`https://swapi.dev/api/planets/${index}`)
+        loadData();
+    }, []);
+
+    const loadData = async () => {
+
+    await fetch(`https://swapi.dev/api/planets/${index}`)
     .then((res) => res.json())
     .then((data) => {
-
 
     data.residents.map((item, index) =>(
         fetch(item)
@@ -28,11 +32,9 @@ const ResidentsName = () => {
         })
         
     ))
-})
-}, []);
+})};
 
-        
-    console.log(resident);
+    // console.log(resident);
     return(
     <MDBContainer>
             <div style={{marginTop: "50px"}}>
@@ -45,7 +47,11 @@ const ResidentsName = () => {
                                     <td>
                                         <Link to={""} key={""}>
                                         <h3>Residents of the planet</h3>
-                                                    <h1>{resident}</h1>
+                                        {resident.map(user => (
+                                            <div key={user}>
+                                                {user.name}
+                                            </div>
+                                        ))}
                                         </Link>
                                     </td>
 
@@ -68,26 +74,3 @@ const ResidentsName = () => {
 
 
 export default ResidentsName;
-
-
-
-
-
-// const { index } = useParams()
-// useEffect(() => {
-// fetch(`https://swapi.dev/api/planets/${index}`)
-// .then((res) => res.json())
-// .then((data) => {
-
-
-//     data.residents.map((item, index) =>(
-//         fetch(item)
-//         .then((x) => x.json())
-//         .then((y) => {
-//             console.log(y)
-//             setResident(y.name)
-//         })
-        
-//     ))
-// })
-// }, []);
