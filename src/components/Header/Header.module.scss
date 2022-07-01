@@ -29,6 +29,8 @@
         display: flex;
         justify-content: center;
         height: 100%;
+
+        margin-right: $spacing-md;
       }
       &:last-of-type {
         display: flex;

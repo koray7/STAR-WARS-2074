@@ -9,6 +9,7 @@ import {
   MDBContainer,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import styles from "../Header/Header.module.scss";
 
 const ResidentDetails = () => {
   const [residentDetails, setResidentDetails] = useState([]);
@@ -36,14 +37,21 @@ const ResidentDetails = () => {
 
   return (
     <MDBContainer>
-      <div style={{ marginTop: "50px" }}>
+      <div>
         <MDBRow>
           <MDBCol size="24">
             <MDBTable>
               <MDBTableBody>
                 <tr>
                   <td>
-                    <div key={index}>
+                    <div
+                      style={{
+                        marginTop: "100px",
+                        color: "blue",
+                        fontWeight: "900",
+                      }}
+                      key={index}
+                    >
                       <h2>Resident Name: {residentDetails.name}</h2>
                       <br />
                       <br />
@@ -55,7 +63,16 @@ const ResidentDetails = () => {
                       <h3>Mass: {residentDetails.mass}</h3>
                       <h3>Created: {residentDetails.created}</h3>
                     </div>
-                    <button onClick={() => navigate(-3)}>Home Page</button>
+                    <br />
+                    <br />
+                    <div style={{ textAlign: "center" }}>
+                      <button
+                        className={styles.button}
+                        onClick={() => navigate(-3)}
+                      >
+                        Home Page
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </MDBTableBody>
