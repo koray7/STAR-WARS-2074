@@ -3,7 +3,7 @@ import styles from "./Header.module.scss";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,24 +19,15 @@ const Header = () => {
           <nav
             className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
           >
-            <NavLink
-              className={styles.nav__item}
-              to={"/"}
-              onClick={menuToggler}
-            >
+            <a className={styles.nav__item} href={`/planetName/1`}>
               Planet Page
-            </NavLink>
-            <NavLink
-              className={styles.nav__item}
-              to={"/residents"}
-              onClick={menuToggler}
-            >
+            </a>
+            <a className={styles.nav__item} href={"/"}>
               Resident Page
-            </NavLink>
-            {/* This link makes no sense */}
-            {/*  <a className={styles.nav__item} href={"/"}>
+            </a>
+            <a className={styles.nav__item} href={"/"}>
               Resident Details Page
-            </a> */}
+            </a>
             <div className={styles.nav__button__container}>
               <Button />
             </div>
@@ -59,7 +50,7 @@ const Button = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <button className={styles.button} onClick={() => navigate("/")}>
+      <button className={styles.button} onClick={() => navigate(-3)}>
         Home
       </button>
     </div>

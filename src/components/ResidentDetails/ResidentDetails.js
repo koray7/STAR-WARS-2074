@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -13,20 +13,27 @@ import styles from "../Header/Header.module.scss";
 
 const ResidentDetails = () => {
   const [residentDetails, setResidentDetails] = useState([]);
-  const { id } = useParams();
+  const { index } = useParams();
   const navigate = useNavigate();
 
-  const loadData = useCallback(async () => {
-    await fetch(`https://swapi.dev/api/people/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setResidentDetails(data);
-      });
-  }, [id]);
   useEffect(() => {
     loadData();
-    window.scrollTo(0, 0);
-  }, [loadData]);
+  }, []);
+
+  const loadData = async () => {
+    await fetch(`https://swapi.dev/api/planets/${index}`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.residents.map((item) =>
+          fetch(item)
+            .then((x) => x.json())
+            .then((y) => {
+              console.log(y);
+              setResidentDetails(y);
+            })
+        );
+      });
+  };
 
   return (
     <MDBContainer>
@@ -43,7 +50,7 @@ const ResidentDetails = () => {
                         color: "blue",
                         fontWeight: "900",
                       }}
-                      key={id}
+                      key={index}
                     >
                       <h2>Resident Name: {residentDetails.name}</h2>
                       <br />

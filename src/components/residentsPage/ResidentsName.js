@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -13,19 +13,26 @@ import {
 
 const ResidentsName = () => {
   const [resident, setResident] = useState([]);
-  const { id } = useParams();
+  const { index } = useParams();
 
-  const loadData = useCallback(async () => {
-    await fetch(`https://swapi.dev/api/people/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setResident(data);
-      });
-  }, [id]);
   useEffect(() => {
     loadData();
-    window.scrollTo(0, 0);
-  }, [loadData]);
+  }, []);
+
+  const loadData = async () => {
+    await fetch(`https://swapi.dev/api/planets/${index}`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.residents.map((item) =>
+          fetch(item)
+            .then((x) => x.json())
+            .then((y) => {
+              console.log(y);
+              setResident(y);
+            })
+        );
+      });
+  };
 
   // console.log(resident);
   return (
@@ -38,14 +45,14 @@ const ResidentsName = () => {
                 <tr>
                   <td>
                     <Link
-                      to={`/planetName/residentsName/residentDetails/${id}`}
-                      key={id}
+                      to={`/planetName/residentsName/residentDetails/${index}`}
+                      key={index}
                     >
                       <h1>Residents of the planet</h1>
                       <br />
                       <br />
                       <br />
-
+                      {/* {resident.map(user => ( */}
                       <div style={{ marginTop: "50px" }} key={""}>
                         <h2>Name: {resident.name}</h2>
                         <br />

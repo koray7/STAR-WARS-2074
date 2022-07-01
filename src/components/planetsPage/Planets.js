@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
+  MDBRow,
+  MDBCol,
   MDBContainer,
   MDBBtn,
 } from "mdb-react-ui-kit";
@@ -12,29 +14,19 @@ import { Link } from "react-router-dom";
 function Planets() {
   const [data, setData] = useState([]);
   const [value, setValue] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState({});
 
-  const loadUsersData = useCallback(async () => {
-    setIsLoading(true);
-    setError(false);
-    await axios
-      .get("https://swapi.dev/api/planets/?page=" + currentPage)
-      .then((res) => {
-        setIsLoading(false);
-        setSuccess(true);
-        setData(res.data);
-      })
-      .catch((err) => {
-        setError(err);
-        console.log(err);
-      });
-  }, [currentPage]);
   useEffect(() => {
     loadUsersData();
-  }, [currentPage, loadUsersData]);
+  }, []);
+
+  const loadUsersData = async () => {
+    return await axios
+      .get("https://swapi.dev/api/planets/")
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  console.log("data", data);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -80,57 +72,40 @@ function Planets() {
         </MDBBtn>
       </form>
       <div style={{ marginTop: "100px" }}>
-        <MDBTable responsive>
-          <MDBTableHead dark className="d-flex justify-content-between p-3">
-            <th
-              onClick={() => setCurrentPage(currentPage - 1)}
-              className={currentPage === 1 ? "disabled" : "affordance"}
-            >
-              {`< Prev`}
-            </th>
-            <th>NAME OF THE PLANETS</th>
-            <th
-              onClick={() => setCurrentPage(currentPage + 1)}
-              className={currentPage === 6 ? "disabled" : "affordance"}
-            >
-              {`Next >`}
-            </th>
-          </MDBTableHead>
-
-          {isLoading && (
-            <MDBTableBody>
-              <th scope="col">
-                <td className="loading">Loading...</td>
-              </th>
-            </MDBTableBody>
-          )}
-          {error.message && (
-            <MDBTableBody>
-              <th scope="col">
-                <td>Error {error.message}</td>
-              </th>
-            </MDBTableBody>
-          )}
-          {success &&
-            data.results.map((item) => {
-              const id = item.url.slice(0, -1).split("/").pop();
-
-              return (
-                <MDBTableBody key={id}>
+        <MDBRow>
+          <MDBCol size="12">
+            <MDBTable>
+              <MDBTableHead dark>
+                <tr>
+                  <th className="text-center" scope="col">
+                    NAME OF THE PLANETS
+                  </th>
+                </tr>
+              </MDBTableHead>
+              {data.length === 0 ? (
+                <MDBTableBody className="align-center-mb-0">
                   <tr>
-                    <td>
-                      <Link
-                        to={`/planetName/${id}`}
-                        state={{ residents: item.residents }}
-                      >
-                        <h1>{item.name}</h1> Click to see the planet
-                      </Link>
+                    <td colSpan={8} className="text-center mb-0">
+                      No Data found
                     </td>
                   </tr>
                 </MDBTableBody>
-              );
-            })}
-        </MDBTable>
+              ) : (
+                data.results.map((item, index) => (
+                  <MDBTableBody key={index}>
+                    <tr>
+                      <td>
+                        <Link to={`/planetName/${index + 1}`} key={index}>
+                          <h1>{item.name}</h1> Click to see the planet
+                        </Link>
+                      </td>
+                    </tr>
+                  </MDBTableBody>
+                ))
+              )}
+            </MDBTable>
+          </MDBCol>
+        </MDBRow>
       </div>
     </MDBContainer>
   );
