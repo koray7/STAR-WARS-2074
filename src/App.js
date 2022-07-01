@@ -8,7 +8,16 @@ import Header from "./components/Header/Header";
 
 function App() {
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: "url(https://wallpaperaccess.com/full/4858994.jpg)",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        height: "200vh",
+      }}
+    >
       <Header />
       <Routes>
         <Route path="/" exact element={<Planets />} />

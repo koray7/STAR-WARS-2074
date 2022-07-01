@@ -3,6 +3,9 @@ import styles from "./Header.module.scss";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../styles/index.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,21 +15,21 @@ const Header = () => {
     <div className={styles.header}>
       <div className={styles.header__content}>
         <div>
-          <span className={styles.logo}>Star Wars</span>
+          <span className={styles.logo}>Star Wars 2074</span>
         </div>
         <div>
           <nav
             className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
           >
-            <a className={styles.nav__item} href={"/"}>
+            <Link className={styles.nav__item} to={""}>
               Planet Page
-            </a>
-            <a className={styles.nav__item} href={"/"}>
+            </Link>
+            <Link className={styles.nav__item} to={"/"}>
               Resident Page
-            </a>
-            <a className={styles.nav__item} href={"/"}>
+            </Link>
+            <Link className={styles.nav__item} to={"/"}>
               Resident Details Page
-            </a>
+            </Link>
             <div className={styles.nav__button__container}>
               <Button />
             </div>
@@ -37,7 +40,7 @@ const Header = () => {
             <Button />
           </div>
           <button className={styles.header__toggler} onClick={menuToggler}>
-            <BiMenuAltRight />
+            {!menuOpen ? <BiMenuAltRight /> : <AiOutlineCloseSquare />}
           </button>
         </div>
       </div>
@@ -46,7 +49,14 @@ const Header = () => {
 };
 
 const Button = () => {
-  return <button className={styles.button}>Click me</button>;
+  const navigate = useNavigate();
+  return (
+    <div>
+      <button className={styles.button} onClick={() => navigate("/")}>
+        Home
+      </button>
+    </div>
+  );
 };
 
 export default Header;

@@ -25,7 +25,7 @@ function PlanetName() {
 
   return (
     <MDBContainer>
-      <div style={{ marginTop: "50px" }}>
+      <div>
         <MDBRow>
           <MDBCol size="24">
             <MDBTable>
@@ -36,7 +36,8 @@ function PlanetName() {
                       to={`/planetName/residentsName/${index + 1}`}
                       key={index}
                     >
-                      <h1>{planet}</h1> Click to see the residents of the planet
+                      <h1 style={{ marginTop: "100px" }}>{planet}</h1> Click to
+                      see the residents of the planet
                     </Link>
                   </td>
                 </tr>

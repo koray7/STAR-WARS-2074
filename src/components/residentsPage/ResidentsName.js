@@ -37,7 +37,7 @@ const ResidentsName = () => {
   // console.log(resident);
   return (
     <MDBContainer>
-      <div style={{ marginTop: "50px" }}>
+      <div>
         <MDBRow>
           <MDBCol size="24">
             <MDBTable>
@@ -53,7 +53,7 @@ const ResidentsName = () => {
                       <br />
                       <br />
                       {/* {resident.map(user => ( */}
-                      <div key={""}>
+                      <div style={{ marginTop: "50px" }} key={""}>
                         <h2>Name: {resident.name}</h2>
                         <br />
                         <h5>Click to see details of the resident</h5>
