@@ -3,9 +3,10 @@ import styles from "./Header.module.scss";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { NavLink, useNavigate } from "react-router-dom";
 import "../../styles/index.scss";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,15 +22,21 @@ const Header = () => {
           <nav
             className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
           >
-            <Link className={styles.nav__item} to={""}>
+            <NavLink
+              className={styles.nav__item}
+              to={"/"}
+              onClick={menuToggler}
+            >
               Planet Page
-            </Link>
-            <Link className={styles.nav__item} to={"/"}>
+            </NavLink>
+            <NavLink
+              className={styles.nav__item}
+              to={"/residents"}
+              onClick={menuToggler}
+            >
               Resident Page
-            </Link>
-            <Link className={styles.nav__item} to={"/"}>
-              Resident Details Page
-            </Link>
+            </NavLink>
+
             <div className={styles.nav__button__container}>
               <Button />
             </div>
