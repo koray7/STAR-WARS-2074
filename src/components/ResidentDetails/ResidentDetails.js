@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -13,27 +13,20 @@ import styles from "../Header/Header.module.scss";
 
 const ResidentDetails = () => {
   const [residentDetails, setResidentDetails] = useState([]);
-  const { index } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    await fetch(`https://swapi.dev/api/planets/${index}`)
+  const loadData = useCallback(async () => {
+    await fetch(`https://swapi.dev/api/people/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        data.residents.map((item) =>
-          fetch(item)
-            .then((x) => x.json())
-            .then((y) => {
-              console.log(y);
-              setResidentDetails(y);
-            })
-        );
+        setResidentDetails(data);
       });
-  };
+  }, [id]);
+  useEffect(() => {
+    loadData();
+    window.scrollTo(0, 0);
+  }, [loadData]);
 
   return (
     <MDBContainer>
@@ -50,7 +43,7 @@ const ResidentDetails = () => {
                         color: "blue",
                         fontWeight: "900",
                       }}
-                      key={index}
+                      key={id}
                     >
                       <h2>Resident Name: {residentDetails.name}</h2>
                       <br />

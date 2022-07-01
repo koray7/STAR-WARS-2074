@@ -5,6 +5,7 @@ import ResidentsName from "./components/residentsPage/ResidentsName.js";
 import ResidentDetails from "./components/ResidentDetails/ResidentDetails";
 import "./styles/index.scss";
 import Header from "./components/Header/Header";
+import Residents from "./components/ResidentList/Residents.js";
 
 function App() {
   return (
@@ -12,13 +13,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" exact element={<Planets />} />
-        <Route path="/planetName/:index" element={<PlanetName />} />
+        <Route path="/residents" element={<Residents />} />
+        <Route path="/planetName/:id" element={<PlanetName />} />
         <Route
-          path="/planetName/residentsName/:index"
+          path="/planetName/residentsName/:id"
           element={<ResidentsName />}
         />
         <Route
-          path="/planetName/residentsName/residentDetails/:index"
+          path="/planetName/residentsName/residentDetails/:id"
           element={<ResidentDetails />}
         />
       </Routes>
