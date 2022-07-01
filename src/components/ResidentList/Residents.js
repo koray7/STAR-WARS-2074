@@ -9,7 +9,7 @@ import {
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 
-function Planets() {
+function Residents() {
   const [data, setData] = useState([]);
   const [value, setValue] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,11 +17,11 @@ function Planets() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState({});
 
-  const loadUsersData = useCallback(async () => {
+  const loadResidentsData = useCallback(async () => {
     setIsLoading(true);
     setError(false);
     await axios
-      .get("https://swapi.dev/api/planets/?page=" + currentPage)
+      .get("https://swapi.dev/api/people/?page=" + currentPage)
       .then((res) => {
         setIsLoading(false);
         setSuccess(true);
@@ -33,13 +33,14 @@ function Planets() {
       });
   }, [currentPage]);
   useEffect(() => {
-    loadUsersData();
-  }, [currentPage, loadUsersData]);
+    loadResidentsData();
+    window.scrollTo(0, 0);
+  }, [currentPage, loadResidentsData]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     return await axios
-      .get(`https://swapi.dev/api/planets/?search=${value}`)
+      .get(`https://swapi.dev/api/people/?search=${value}`)
       .then((res) => {
         setData(res.data);
         setValue("");
@@ -47,13 +48,13 @@ function Planets() {
       .catch((err) => console.log(err));
   };
   const handleReset = () => {
-    loadUsersData();
+    loadResidentsData();
   };
 
   return (
     <MDBContainer>
       <br />
-      <h2 className="text-center">Search for a planet</h2>
+      <h2 className="text-center">Search for a person</h2>
       <form
         style={{
           margin: "auto",
@@ -67,7 +68,7 @@ function Planets() {
         <input
           type="text"
           className="form-control"
-          placeholder="Name of the planet..."
+          placeholder="Name of the person..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
@@ -88,10 +89,10 @@ function Planets() {
             >
               {`< Prev`}
             </th>
-            <th>NAME OF THE PLANETS</th>
+            <th>NAME OF THE PEOPLE</th>
             <th
               onClick={() => setCurrentPage(currentPage + 1)}
-              className={currentPage === 6 ? "disabled" : "affordance"}
+              className={currentPage === 9 ? "disabled" : "affordance"}
             >
               {`Next >`}
             </th>
@@ -107,7 +108,7 @@ function Planets() {
           {error.message && (
             <MDBTableBody>
               <th scope="col">
-                <td>Error {error.message}</td>
+                <td>Error: {error.message}</td>
               </th>
             </MDBTableBody>
           )}
@@ -120,10 +121,10 @@ function Planets() {
                   <tr>
                     <td>
                       <Link
-                        to={`/planetName/${id}`}
+                        to={`/planetName/residentsName/${id}`}
                         state={{ residents: item.residents }}
                       >
-                        <h1>{item.name}</h1> Click to see the planet
+                        <h1>{item.name}</h1> Click to see the person
                       </Link>
                     </td>
                   </tr>
@@ -136,4 +137,4 @@ function Planets() {
   );
 }
 
-export default Planets;
+export default Residents;

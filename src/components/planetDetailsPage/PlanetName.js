@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import {
   MDBTable,
@@ -10,37 +10,74 @@ import {
 } from "mdb-react-ui-kit";
 
 function PlanetName() {
-  const [planet, setPlanet] = useState([]);
-  const { index } = useParams();
+  const [residentPopulatedData, setResidentPopulatedData] = useState([]);
+  const [planet, setPlanet] = useState("");
+  const [residents, setResidents] = useState([]);
+  const { id } = useParams();
+
+  const populateResidents = useCallback(async () => {
+    const getResident = async (id) => {
+      const res = await fetch(`https://swapi.dev/api/people/${id}`);
+      const data = await res.json();
+      return data;
+    };
+    const residentsId = residents.map((resident) =>
+      resident.slice(0, -1).split("/").pop()
+    );
+
+    setResidentPopulatedData(
+      await Promise.all(residentsId.map(async (id) => await getResident(id)))
+    );
+  }, [residents]);
 
   useEffect(() => {
-    fetch(`https://swapi.dev/api/planets/${index}`)
+    fetch(`https://swapi.dev/api/planets/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setPlanet(data.name);
+        setResidents(data.residents);
       })
       .catch(console.error);
-  }, []);
+    //Scroll restoration
+    window.scrollTo(0, 0);
+  }, [id]);
+  useEffect(() => {
+    if (residents) {
+      populateResidents();
+    }
+  }, [residents, populateResidents]);
 
   return (
     <MDBContainer>
       <div>
         <MDBRow>
           <MDBCol size="24">
-            <MDBTable>
+            <MDBTable style={{ marginTop: "100px" }}>
               <MDBTableBody>
-                <tr>
-                  <td>
-                    <Link
-                      to={`/planetName/residentsName/${index + 1}`}
-                      key={index}
-                    >
-                      <h1 style={{ marginTop: "100px" }}>{planet}</h1> Click to
-                      see the residents of the planet
-                    </Link>
-                  </td>
-                </tr>
+                {residentPopulatedData?.length === 0 && (
+                  <tr>
+                    <td>No Residents in this planet</td>
+                  </tr>
+                )}
+                <h1>Planet: {planet}</h1>
+                <h2>Residents</h2>
+                {residentPopulatedData?.map((resident) => {
+                  return (
+                    <tr key={resident.name}>
+                      <td>
+                        <Link
+                          to={`/planetName/residentsName/${resident.url
+                            .slice(0, -1)
+                            .split("/")
+                            .pop()}`}
+                          key={resident.url}
+                        >
+                          {resident.name}
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </MDBTableBody>
             </MDBTable>
           </MDBCol>
