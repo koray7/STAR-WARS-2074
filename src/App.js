@@ -11,7 +11,8 @@ function App() {
   return (
     <div
       style={{
-        backgroundImage: "url(https://wallpaperaccess.com/full/4858994.jpg)",
+        backgroundImage:
+          "url(https://images.hdqwalls.com/download/the-mandalorian-4k-2019-tv-show-ft-1242x2688.jpg)",
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -22,12 +23,12 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" exact element={<Planets />} />
-        <Route path="/residents" element={<Residents />} />
         <Route path="/planetName/:id" element={<PlanetName />} />
         <Route
           path="/planetName/residentsName/:id"
           element={<ResidentsName />}
         />
+        <Route path="/residents" element={<Residents />} />
         <Route
           path="/planetName/residentsName/residentDetails/:id"
           element={<ResidentDetails />}

@@ -7,9 +7,9 @@ import {
   MDBRow,
   MDBCol,
   MDBContainer,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import styles from "../Header/Header.module.scss";
 
 const ResidentDetails = () => {
   const [residentDetails, setResidentDetails] = useState([]);
@@ -27,6 +27,7 @@ const ResidentDetails = () => {
     loadData();
     window.scrollTo(0, 0);
   }, [loadData]);
+  console.log(residentDetails);
 
   return (
     <MDBContainer>
@@ -39,8 +40,8 @@ const ResidentDetails = () => {
                   <td>
                     <div
                       style={{
-                        marginTop: "100px",
-                        color: "blue",
+                        marginTop: "150px",
+                        color: "dodgerBlue",
                         fontWeight: "900",
                       }}
                       key={id}
@@ -59,12 +60,15 @@ const ResidentDetails = () => {
                     <br />
                     <br />
                     <div style={{ textAlign: "center" }}>
-                      <button
-                        className={styles.button}
+                      <MDBBtn
+                        rounded
+                        size="lg"
+                        className="d-grid gap-2 col-4 mx-auto"
+                        color="info"
                         onClick={() => navigate("/")}
                       >
-                        Home Page
-                      </button>
+                        Home
+                      </MDBBtn>
                     </div>
                   </td>
                 </tr>

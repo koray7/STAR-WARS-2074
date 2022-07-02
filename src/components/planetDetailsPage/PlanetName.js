@@ -38,9 +38,11 @@ function PlanetName() {
         setResidents(data.residents);
       })
       .catch(console.error);
-    //Scroll restoration
+    // Scroll restoration
     window.scrollTo(0, 0);
   }, [id]);
+  console.log(residentPopulatedData);
+
   useEffect(() => {
     if (residents) {
       populateResidents();
@@ -52,15 +54,22 @@ function PlanetName() {
       <div>
         <MDBRow>
           <MDBCol size="24">
-            <MDBTable style={{ marginTop: "100px" }}>
-              <MDBTableBody>
+            <MDBTable style={{ marginTop: "180px" }}>
+              <MDBTableBody
+                style={{
+                  marginTop: "100px",
+                  color: "dodgerBlue",
+                  fontWeight: "900",
+                }}
+              >
                 {residentPopulatedData?.length === 0 && (
                   <tr>
                     <td>No Residents in this planet</td>
                   </tr>
                 )}
-                <h1>Planet: {planet}</h1>
-                <h2>Residents</h2>
+                <h2>Planet name: {planet}</h2>
+                <br />
+                <h3>Residents</h3>
                 {residentPopulatedData?.map((resident) => {
                   return (
                     <tr key={resident.name}>

@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../styles/index.scss";
-// import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
