@@ -41,12 +41,11 @@ const ResidentsName = () => {
                       to={`/planetName/residentsName/residentDetails/${id}`}
                       key={id}
                     >
-                      <h1>Residents of the planet</h1>
                       <br />
                       <br />
                       <br />
-                      <div style={{ marginTop: "50px" }} key={""}>
-                        <h2>Name: {resident.name}</h2>
+                      <div style={{ marginTop: "100px" }} key={""}>
+                        <h2>Name: ~ {resident.name} ~</h2>
                         <br />
                         <h5>Click to see details of the resident</h5>
                       </div>

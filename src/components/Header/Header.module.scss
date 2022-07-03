@@ -85,12 +85,9 @@
   &__item {
     display: block;
     padding-left: $spacing-md;
-
     text-decoration: none;
     color: inherit;
-
     height: 100%;
-
     transition: 0.3s ease color;
     &:hover {
       color: $primary;
@@ -106,10 +103,11 @@
     padding: 0;
 
     &__item {
-      padding: 0 $spacing-lg;
+      padding: 0 $spacing-md;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-left: 6vw;
     }
   }
   &__button__container {

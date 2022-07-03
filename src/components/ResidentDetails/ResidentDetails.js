@@ -46,16 +46,18 @@ const ResidentDetails = () => {
                       }}
                       key={id}
                     >
-                      <h2>Resident Name: {residentDetails.name}</h2>
+                      <h2>
+                        Resident Name: <h1>{residentDetails.name}</h1>
+                      </h2>
                       <br />
                       <br />
-                      <h3>Gender: {residentDetails.gender}</h3>
-                      <h3>Birth Year: {residentDetails.birth_year}</h3>
-                      <h3>Eye Color: {residentDetails.eye_color}</h3>
-                      <h3>Hair Color: {residentDetails.hair_color}</h3>
-                      <h3>Skin Color: {residentDetails.skin_color}</h3>
-                      <h3>Mass: {residentDetails.mass}</h3>
-                      <h3>Created: {residentDetails.created}</h3>
+                      <h4>Gender: {residentDetails.gender}</h4>
+                      <h4>Birth Year: {residentDetails.birth_year}</h4>
+                      <h4>Eye Color: {residentDetails.eye_color}</h4>
+                      <h4>Hair Color: {residentDetails.hair_color}</h4>
+                      <h4>Skin Color: {residentDetails.skin_color}</h4>
+                      <h4>Mass: {residentDetails.mass}</h4>
+                      <h4>Created: {residentDetails.created}</h4>
                     </div>
                     <br />
                     <br />

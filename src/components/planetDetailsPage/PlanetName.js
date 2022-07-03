@@ -67,7 +67,18 @@ function PlanetName() {
                     <td>No Residents in this planet</td>
                   </tr>
                 )}
-                <h2>Planet name: {planet}</h2>
+                <h2>
+                  Planet name:{" "}
+                  <span
+                    style={{
+                      marginTop: "100px",
+                      color: "dodgerBlue",
+                      fontWeight: "900",
+                    }}
+                  >
+                    ~ {planet} ~
+                  </span>
+                </h2>
                 <br />
                 <h3>Residents</h3>
                 {residentPopulatedData?.map((resident) => {
