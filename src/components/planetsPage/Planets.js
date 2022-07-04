@@ -130,7 +130,7 @@ function Planets() {
                         to={`/planetName/${id}`}
                         state={{ residents: item.residents }}
                       >
-                        <h1>{item.name}</h1> Click to see the planet
+                        {/* <h1>{item.name}</h1> Click to see the planet */}
                       </Link>
                     </td>
                   </tr>
