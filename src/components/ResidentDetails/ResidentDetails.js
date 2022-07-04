@@ -51,13 +51,28 @@ const ResidentDetails = () => {
                       </h2>
                       <br />
                       <br />
-                      <h4>Gender: {residentDetails.gender}</h4>
-                      <h4>Birth Year: {residentDetails.birth_year}</h4>
-                      <h4>Eye Color: {residentDetails.eye_color}</h4>
-                      <h4>Hair Color: {residentDetails.hair_color}</h4>
-                      <h4>Skin Color: {residentDetails.skin_color}</h4>
-                      <h4>Mass: {residentDetails.mass}</h4>
-                      <h4>Created: {residentDetails.created}</h4>
+                      <h4>
+                        <span>Gender:</span> {residentDetails.gender}
+                      </h4>
+                      <h4>
+                        <span>Birth Year:</span> {residentDetails.birth_year}
+                      </h4>
+                      <h4>
+                        <span>Eye Color:</span> {residentDetails.eye_color}
+                      </h4>
+                      <h4>
+                        <span>Hair Color:</span> {residentDetails.hair_color}
+                      </h4>
+                      <h4>
+                        <span>Skin Color:</span> {residentDetails.skin_color}
+                      </h4>
+                      <h4>
+                        <span>Mass: </span>
+                        {residentDetails.mass}
+                      </h4>
+                      <h4>
+                        <span>Creation:</span> {residentDetails.created}
+                      </h4>
                     </div>
                     <br />
                     <br />

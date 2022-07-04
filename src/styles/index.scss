@@ -33,3 +33,10 @@ button {
 .loading {
   font-size: 3rem;
 }
+@include breakpoint(md) {
+  span {
+    color: #1e90ff;
+    font-weight: 900;
+    font-size: 2vw;
+  }
+}

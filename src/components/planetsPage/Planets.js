@@ -14,11 +14,16 @@ function Planets() {
   const [value, setValue] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({});
 
   const loadUsersData = useCallback(async () => {
+    setIsLoading(true);
+    setError(false);
     await axios
       .get("https://swapi.dev/api/planets/?page=" + currentPage)
       .then((res) => {
+        setIsLoading(false);
         setSuccess(true);
         setData(res.data);
       })
@@ -92,6 +97,20 @@ function Planets() {
               {`Next >`}
             </th>
           </MDBTableHead>
+          {isLoading && (
+            <MDBTableBody>
+              <th scope="col">
+                <td className="loading">Loading...</td>
+              </th>
+            </MDBTableBody>
+          )}
+          {error.message && (
+            <MDBTableBody>
+              <th scope="col">
+                <td>Error: {error.message}</td>
+              </th>
+            </MDBTableBody>
+          )}
           {success &&
             data.results.map((item) => {
               const id = item.url.slice(0, -1).split("/").pop();

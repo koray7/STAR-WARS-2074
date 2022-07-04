@@ -18,8 +18,6 @@ function Residents() {
   const [error, setError] = useState({});
 
   const loadResidentsData = useCallback(async () => {
-    setIsLoading(true);
-    setError(false);
     await axios
       .get("https://swapi.dev/api/people/?page=" + currentPage)
       .then((res) => {
