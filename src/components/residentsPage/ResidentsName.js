@@ -47,7 +47,7 @@ const ResidentsName = () => {
                       <div style={{ marginTop: "100px" }} key={""}>
                         <h2>Name: ~ {resident.name} ~</h2>
                         <br />
-                        <h5>Click to see details of the resident</h5>
+                        <h5>Details of the resident</h5>
                       </div>
                     </Link>
                   </td>
